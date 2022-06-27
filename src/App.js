@@ -1,11 +1,5 @@
 import { useState } from 'react'
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  useMatch,
-} from 'react-router-dom'
+import { Routes, Route, Link, useMatch } from 'react-router-dom'
 
 const Menu = () => {
   const padding = {
@@ -31,7 +25,9 @@ const AnecdoteList = ({ anecdotes }) => (
     <h2>Anecdotes</h2>
     <ul>
       {anecdotes.map((anecdote) => (
-        <li key={anecdote.id}>{anecdote.content}</li>
+        <Link to={`/anecdotes/${anecdote.id}`}>
+          <li key={anecdote.id}>{anecdote.content}</li>
+        </Link>
       ))}
     </ul>
   </div>
