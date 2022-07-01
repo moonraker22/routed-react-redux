@@ -8,6 +8,7 @@ import loginService from './services/auth'
 import Notification from './components/Notification'
 import Togglable from './components/ToggleComponent'
 import './App.css'
+import { useGetBlogsQuery } from './features/api/apiSlice'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -33,11 +34,13 @@ const App = () => {
       blogService.setToken(user.token)
     }
   }, [])
-
+  const { data, error, isLoading } = useGetBlogsQuery()
+  console.log('data: ', data)
+  console.log('error: ', error)
+  console.log('isLoading: ', isLoading)
   return (
-    <div className="container">
+    <div className='container'>
       <h1>Blogs</h1>
-
       <Notification
         message={message}
         setMessage={setMessage}
@@ -71,8 +74,8 @@ const App = () => {
             setType={setType}
           />
           <br />
-          <div className="blogs">
-            <Togglable buttonLabel="Add New Blog" ref={blogFormRef}>
+          <div className='blogs'>
+            <Togglable buttonLabel='Add New Blog' ref={blogFormRef}>
               <BlogForm
                 setBlogs={setBlogs}
                 blogs={blogs}
