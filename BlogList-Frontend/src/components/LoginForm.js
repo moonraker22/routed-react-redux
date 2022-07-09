@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types'
 import { useRef, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { setUser as setStoreUser } from '../features/user/userSlice'
 
 const LoginForm = ({
   username,
@@ -14,6 +16,7 @@ const LoginForm = ({
 }) => {
   const userNameRef = useRef()
   const passwordRef = useRef()
+  const dispatch = useDispatch()
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -26,6 +29,7 @@ const LoginForm = ({
       blogService.setToken(user.token)
       setUser(user)
       window.localStorage.setItem('user', JSON.stringify(user))
+      dispatch(setStoreUser(user))
       setMessage('Welcome to the application!')
       setType('success')
       console.log('logged in user: ', user)
@@ -42,32 +46,32 @@ const LoginForm = ({
   }, [])
 
   return (
-    <form onSubmit={handleLogin} id="login-form">
+    <form onSubmit={handleLogin} id='login-form'>
       <div>
-        <label htmlFor="username">Username </label>
+        <label htmlFor='username'>Username </label>
         <input
-          type="text"
+          type='text'
           value={username}
-          name="username"
+          name='username'
           onChange={({ target }) => setUsername(target.value)}
-          placeholder="username"
-          id="username"
+          placeholder='username'
+          id='username'
           ref={userNameRef}
         />
       </div>
       <div>
-        <label htmlFor="password">Password </label>
+        <label htmlFor='password'>Password </label>
         <input
-          type="password"
+          type='password'
           value={password}
-          name="password"
+          name='password'
           onChange={({ target }) => setPassword(target.value)}
-          placeholder="password"
-          id="password"
+          placeholder='password'
+          id='password'
           ref={passwordRef}
         />
       </div>
-      <button type="submit">Login</button>
+      <button type='submit'>Login</button>
     </form>
   )
 }

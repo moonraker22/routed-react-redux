@@ -1,9 +1,13 @@
 import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
+import { clearUser } from '../features/user/userSlice'
 
 const LogoutForm = ({ setUser, setMessage, setType }) => {
+  const dispatch = useDispatch()
   const handleLogout = () => {
     setUser(null)
     window.localStorage.removeItem('user')
+    dispatch(clearUser())
     setMessage('Logged out!')
     setType('success')
   }
