@@ -17,6 +17,7 @@ export const apiSlice = createApi({
   }),
   tagTypes: {
     blog: 'Blog',
+    blogs: 'Blogs',
     user: 'User',
   },
   endpoints: (builder) => ({
@@ -53,6 +54,14 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['Blog', 'Blogs'],
     }),
+    getUsers: builder.query({
+      query: () => '/users',
+      providesTags: ['User'],
+    }),
+    getUser: builder.query({
+      query: (id) => `/users/${id}`,
+      providesTags: ['User'],
+    }),
   }),
 })
 
@@ -62,4 +71,5 @@ export const {
   useCreateBlogMutation,
   useUpdateBlogMutation,
   useDeleteBlogMutation,
+  useGetUsersQuery,
 } = apiSlice

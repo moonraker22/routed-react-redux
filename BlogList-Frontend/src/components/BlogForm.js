@@ -6,12 +6,8 @@ import { getUser } from '../features/user/userSlice'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 
-const BlogForm = ({ setBlogs, blogs, setMessage, setType, blogService }) => {
+const BlogForm = ({ setMessage, setType }) => {
   const [title, setTitle] = useState('')
-  // const [author, setAuthor] = useState(() => {
-  //   const user = JSON.parse(localStorage.getItem('user'))
-  //   return user?.username || ''
-  // })
   const [author, setAuthor] = useState('')
   let user = useSelector(getUser)
 
@@ -20,7 +16,6 @@ const BlogForm = ({ setBlogs, blogs, setMessage, setType, blogService }) => {
       user = JSON.parse(localStorage.getItem('user'))
     }
     setAuthor(user?.username || '')
-    console.log('user: ', user)
   }, [])
 
   const [url, setUrl] = useState('')
@@ -37,10 +32,7 @@ const BlogForm = ({ setBlogs, blogs, setMessage, setType, blogService }) => {
     }
 
     try {
-      // const returnedBlog = await blogService.create(blog)
-      // setBlogs(blogs.concat(returnedBlog))
       const token = user.token
-      console.log('token: ', token)
       await createBlog(blog, token).unwrap()
       setTitle('')
       setUrl('')
@@ -52,7 +44,6 @@ const BlogForm = ({ setBlogs, blogs, setMessage, setType, blogService }) => {
       setType('error')
     }
   }
-  // console.log('blogs: ', blogs)
   return (
     <form onSubmit={handleBlogSubmit} data-testid='blog-form'>
       <div>

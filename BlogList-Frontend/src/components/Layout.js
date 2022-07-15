@@ -1,7 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom'
-import Notification from './Notification'
 
-const Layout = ({ message, setMessage, type, setType }) => {
+const Layout = () => {
   return (
     <div>
       <header>
@@ -21,12 +20,6 @@ const Layout = ({ message, setMessage, type, setType }) => {
       </header>
       <div className='container'>
         <h1>Blogs</h1>
-        <Notification
-          message={message}
-          setMessage={setMessage}
-          type={type}
-          setType={setType}
-        />
         <Outlet />
       </div>
     </div>

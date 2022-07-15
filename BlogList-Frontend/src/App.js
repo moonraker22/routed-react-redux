@@ -11,8 +11,12 @@ import './App.css'
 import { useGetBlogsQuery } from './features/api/apiSlice'
 import { useDispatch } from 'react-redux'
 import { setUser as setReduxUser } from './features/user/userSlice'
-import Layout from './components/Layout'
 import Spinner from './components/Spinner'
+import Blog from './components/Blog'
+import UserList from './components/UserList'
+import BlogDisplay from './components/BlogDisplay'
+import Layout from './components/Layout'
+import UserBlogList from './components/UserBlogList'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -36,7 +40,7 @@ const App = () => {
     if (window.localStorage.getItem('user')) {
       const user = JSON.parse(window.localStorage.getItem('user'))
       setUser(user)
-      blogService.setToken(user.token)
+      // blogService.setToken(user.token)
     }
   }, [])
 
@@ -52,8 +56,8 @@ const App = () => {
   }
 
   return (
-    <div className='container'>
-      <h1>Blogs</h1>
+    <>
+      <Layout />
       <Notification
         message={message}
         setMessage={setMessage}
@@ -87,20 +91,27 @@ const App = () => {
             setType={setType}
           />
           <br />
-          <BlogList
-            data={data}
-            setBlogs={setBlogs}
-            blogs={blogs}
-            setMessage={setMessage}
-            setType={setType}
-            blogFormRef={blogFormRef}
-          />
           <Routes>
-            <Route path='users' element={<Spinner loading={true} />} />
+            <Route
+              path='/'
+              element={
+                <BlogList
+                  data={data}
+                  setBlogs={setBlogs}
+                  blogs={blogs}
+                  setMessage={setMessage}
+                  setType={setType}
+                  blogFormRef={blogFormRef}
+                />
+              }
+            />
+            <Route path='users' element={<UserList />} />
+            <Route path='users/:id' element={<UserBlogList />} />
+            <Route path='blogs/:id' element={<BlogDisplay />} />
           </Routes>
         </>
       )}
-    </div>
+    </>
   )
 }
 

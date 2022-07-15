@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-vars */
 import { useState } from 'react'
-// import blogService from '../services/blogs'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import {
   useUpdateBlogMutation,
   useDeleteBlogMutation,
@@ -12,7 +10,7 @@ const Blog = ({ blog }) => {
   const [likes, setLikes] = useState(blog.likes)
   const [showDetails, setShowDetails] = useState(false)
   const [updateBlog, { isLoading }] = useUpdateBlogMutation()
-  const [deleteBlog, { isLoading: isLoadingDelete }] = useDeleteBlogMutation()
+  const [deleteBlog] = useDeleteBlogMutation()
 
   const showWhenVisible = { display: showDetails ? '' : 'none' }
 
@@ -43,10 +41,6 @@ const Blog = ({ blog }) => {
     return <Spinner loading={isLoading} />
   }
 
-  if (isLoadingDelete) {
-    return <Spinner loading={isLoadingDelete} />
-  }
-
   return (
     <article className='blog-list'>
       <div onClick={() => setShowDetails(!showDetails)}>
@@ -75,8 +69,8 @@ const Blog = ({ blog }) => {
 
 export default Blog
 
-Blog.propTypes = {
-  blog: PropTypes.object.isRequired,
-  setBlogs: PropTypes.func.isRequired,
-  blogs: PropTypes.array.isRequired,
-}
+// Blog.propTypes = {
+//   blog: PropTypes.object.isRequired,
+//   setBlogs: PropTypes.func.isRequired,
+//   blogs: PropTypes.array.isRequired,
+// }
