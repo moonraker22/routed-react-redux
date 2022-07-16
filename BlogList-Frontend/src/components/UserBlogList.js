@@ -15,8 +15,7 @@ const UserBlogList = () => {
   } else if (error) {
     return <div>Error: {error.message}</div>
   } else {
-    for (let [key, value] of Object.entries(data)) {
-      console.log(key, value.id, 'key, value')
+    for (let [, value] of Object.entries(data)) {
       if (value.id === id) {
         return (
           <div>

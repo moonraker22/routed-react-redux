@@ -40,7 +40,6 @@ const App = () => {
     if (window.localStorage.getItem('user')) {
       const user = JSON.parse(window.localStorage.getItem('user'))
       setUser(user)
-      // blogService.setToken(user.token)
     }
   }, [])
 

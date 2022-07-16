@@ -62,6 +62,14 @@ export const apiSlice = createApi({
       query: (id) => `/users/${id}`,
       providesTags: ['User'],
     }),
+    addComment: builder.mutation({
+      query: (commentObj) => ({
+        url: `/blogs/${commentObj.id}/comments`,
+        body: commentObj,
+        method: 'POST',
+      }),
+      invalidatesTags: ['Blog', 'Blogs'],
+    }),
   }),
 })
 
@@ -72,4 +80,6 @@ export const {
   useUpdateBlogMutation,
   useDeleteBlogMutation,
   useGetUsersQuery,
+  useGetUserQuery,
+  useAddCommentMutation,
 } = apiSlice

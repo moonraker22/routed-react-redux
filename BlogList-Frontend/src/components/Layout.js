@@ -1,21 +1,24 @@
 import { NavLink, Outlet } from 'react-router-dom'
 
 const Layout = () => {
+  const navStyle = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '20px',
+    backgroundColor: 'transparent',
+    borderBottom: '1px solid #ccc',
+  }
   return (
     <div>
       <header>
-        <nav>
-          <ul>
-            <li>
-              <NavLink to='/'>Home</NavLink>
-            </li>
-            <li>
-              <NavLink to='/users'>Users</NavLink>
-            </li>
-            <li>
-              <NavLink to='/contact'>Contact</NavLink>
-            </li>
-          </ul>
+        <nav style={navStyle}>
+          <div>
+            <NavLink to='/'>Home</NavLink>
+          </div>
+          <div>
+            <NavLink to='/users'>Users</NavLink>
+          </div>
         </nav>
       </header>
       <div className='container'>
